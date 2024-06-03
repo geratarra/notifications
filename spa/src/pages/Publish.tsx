@@ -1,14 +1,30 @@
-import { useState } from "react";
-import EnvVars from "./constants/EnvVars";
-
-const url = `${EnvVars.API_URL}:${EnvVars.API_PORT}/api`;
+import { useEffect, useState } from "react";
+import EnvVars from "../constants/EnvVars";
+import { getCategories } from "../services/CategoryService";
+import Category from "../types/Category";
 
 export default () => {
     const [message, setMessage] = useState<string>();
     const [category, setCategory] = useState<string>("Sports");
+    const [categories, setCategories] = useState<Category[] | null>([]);
+
+    const fetchCategories = async () => {
+        setCategories(await getCategories());
+    };
+
+    useEffect(() => {
+        fetchCategories();
+    }, []);
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
+        try {
+            const url = `${EnvVars.API_URL}:${EnvVars.API_PORT}/api/users/all`;
+            const data = await fetch(url).then(res => res.json());;
+            console.log(data);
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -30,9 +46,7 @@ export default () => {
                         <div className="control">
                             <div className="select">
                                 <select onChange={handleSelectChange}>
-                                    <option value="Sports">Sports</option>
-                                    <option value="Finance">Fincance</option>
-                                    <option value="Movies">Movies</option>
+                                    {categories?.map(category => <option value={category.id}>{category.name}</option>)}
                                 </select>
                             </div>
                         </div>

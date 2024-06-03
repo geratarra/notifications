@@ -20,6 +20,8 @@ import HttpStatusCodes from '@src/constants/HttpStatusCodes';
 import { NodeEnvs } from '@src/constants/misc';
 import { RouteError } from '@src/other/classes';
 
+var cors = require('cors')
+
 
 // **** Variables **** //
 
@@ -42,6 +44,7 @@ if (EnvVars.NodeEnv === NodeEnvs.Dev.valueOf()) {
 if (EnvVars.NodeEnv === NodeEnvs.Production.valueOf()) {
   app.use(helmet());
 }
+app.use(cors());
 
 // Add APIs, must be after middleware
 app.use(Paths.Base, BaseRouter);

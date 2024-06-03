@@ -2,7 +2,7 @@ FROM node:20-alpine
 
 RUN apk update
 RUN apk upgrade
-RUN apt install curl
+RUN apk add curl
 
 RUN mkdir /notifications
 

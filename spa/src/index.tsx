@@ -6,8 +6,8 @@ import {
   createBrowserRouter,
   RouterProvider
 } from "react-router-dom";
-import Publish from './Publish';
-import Messages from './Messages';
+import Publish from './pages/Publish';
+import Messages from './pages/Messages';
 import App from './App';
 
 const root = ReactDOM.createRoot(
