@@ -1,6 +1,6 @@
 services:
   web:
-    build: ./frontend/app
+    build: ./spa
     container_name: frontend-spa
     ports:
       - "3002:3000"
@@ -8,21 +8,16 @@ services:
     # develop: 
     #   watch:
     #     - action: sync
-    #       path: ./frontend/app
+    #       path: ./spa
     #       target: /spa
     #       ignore:
     #         - node_modules/
-    networks:
-      - frontend_backend_network
 
   backend:
-    build: ./backend/notifications
+    build: ./backend
     container_name: backend-service
     ports:
       - "8081:8080"
-    networks:
-      - frontend_backend_network
-      - backend_db_network
     depends_on:
       - db
 
@@ -35,11 +30,3 @@ services:
       MONGO_DB: mydatabase
     ports:
       - "5433:5432"
-    networks:
-      - backend_db_network
-
-networks:
-  backend_db_network:
-    driver: bridge
-  frontend_backend_network:
-    driver: bridge

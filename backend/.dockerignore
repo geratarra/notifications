@@ -5,6 +5,7 @@ Dockerfile*
 node_modules/
 npm-debug.log
 build/
+dist/
 README.md
 .eslintignore
 .eslintrc.json
