@@ -1,0 +1,10 @@
+.git
+.gitignore
+.vscode
+Dockerfile*
+node_modules/
+npm-debug.log
+build/
+README.md
+.eslintignore
+.eslintrc.json

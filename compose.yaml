@@ -1,0 +1,45 @@
+services:
+  web:
+    build: ./frontend/app
+    container_name: frontend-spa
+    ports:
+      - "3002:3000"
+    # ToDo: upgrade docker compose so that we can use the watch feature
+    # develop: 
+    #   watch:
+    #     - action: sync
+    #       path: ./frontend/app
+    #       target: /spa
+    #       ignore:
+    #         - node_modules/
+    networks:
+      - frontend_backend_network
+
+  backend:
+    build: ./backend/notifications
+    container_name: backend-service
+    ports:
+      - "8081:8080"
+    networks:
+      - frontend_backend_network
+      - backend_db_network
+    depends_on:
+      - db
+
+  db:
+    image: mongo:latest
+    container_name: db-service
+    environment:
+      MONGO_USER: user
+      MONGO_PASSWORD: password
+      MONGO_DB: mydatabase
+    ports:
+      - "5433:5432"
+    networks:
+      - backend_db_network
+
+networks:
+  backend_db_network:
+    driver: bridge
+  frontend_backend_network:
+    driver: bridge
