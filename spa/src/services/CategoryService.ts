@@ -6,7 +6,7 @@ const url = `${EnvVars.API_URL}:${EnvVars.API_PORT}/api`;
 
 export const getCategories = async (): Promise<Category[] | null> => {
     try {
-        const response = await fetch(`${url}/categories`);
+        const response = await fetch(`${url}/categories/all`);
         if (!response.ok) {
             throw new Error(`Error while fetching Categories:\n
             Status code: ${response.status}
@@ -14,7 +14,7 @@ export const getCategories = async (): Promise<Category[] | null> => {
         }
 
         const data = await response.json();
-        return data.map((category: Category) => category.name);
+        return data.categories;
     } catch (error) {
         console.error(error);
         return null;

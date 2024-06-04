@@ -1,8 +1,7 @@
-
-
 import jsonfile from 'jsonfile';
 
 import { IUser } from '@src/models/User';
+import { ICategory } from "@src/models/Category";
 
 
 // **** Variables **** //
@@ -14,6 +13,7 @@ const DB_FILE_NAME = 'database.json';
 
 interface IDb {
   users: IUser[];
+  categories: ICategory[];
 }
 
 

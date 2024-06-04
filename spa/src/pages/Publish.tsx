@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import EnvVars from "../constants/EnvVars";
 import { getCategories } from "../services/CategoryService";
 import Category from "../types/Category";
+import StringUtils from "../utils/StringUtils";
 
 export default () => {
     const [message, setMessage] = useState<string>();
@@ -46,7 +47,7 @@ export default () => {
                         <div className="control">
                             <div className="select">
                                 <select onChange={handleSelectChange}>
-                                    {categories?.map(category => <option value={category.id}>{category.name}</option>)}
+                                    {categories?.map(category => <option key={category.id} value={category.id}>{StringUtils.capitalizeFirstLetter(category.name)}</option>)}
                                 </select>
                             </div>
                         </div>

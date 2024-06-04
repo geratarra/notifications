@@ -4,6 +4,7 @@ import jetValidator from 'jet-validator';
 import Paths from '../constants/Paths';
 import User from '@src/models/User';
 import UserRoutes from './UserRoutes';
+import CategoryRoutes from './CategoryRoutes';
 
 
 // **** Variables **** //
@@ -11,6 +12,14 @@ import UserRoutes from './UserRoutes';
 const apiRouter = Router(),
   validate = jetValidator();
 
+
+// Adding CategoryRouter
+const categoryRouter = Router();
+
+categoryRouter.get(
+  Paths.Categories.Get,
+  CategoryRoutes.getAll
+);
 
 // ** Add UserRouter ** //
 
@@ -45,6 +54,8 @@ userRouter.delete(
 
 // Add UserRouter
 apiRouter.use(Paths.Users.Base, userRouter);
+// Add CategoryRoutes
+apiRouter.use(Paths.Categories.Base, categoryRouter);
 
 
 // **** Export default **** //

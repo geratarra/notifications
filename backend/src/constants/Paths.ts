@@ -12,4 +12,8 @@ export default {
     Update: '/update',
     Delete: '/delete/:id',
   },
+  Categories: {
+    Base: "/categories",
+    Get: "/all"
+  }
 } as const;
