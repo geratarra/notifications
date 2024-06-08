@@ -26,8 +26,8 @@ export default () => {
 
             <div id="navbarBasicExample" className={burgerOpen ? "navbar-menu is-active" : "navbar-menu"}>
                 <div className="navbar-start">
-                    <Link className="navbar-item" to={"messages"}>
-                        Messages
+                    <Link className="navbar-item" to={"logs"}>
+                        Logs
                     </Link>
 
                     <Link className="navbar-item" to={"publish"}>

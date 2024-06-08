@@ -7,7 +7,7 @@ import {
   RouterProvider
 } from "react-router-dom";
 import Publish from './pages/Publish';
-import Messages from './pages/Messages';
+import Logs from './pages/Logs';
 import App from './App';
 
 const root = ReactDOM.createRoot(
@@ -27,8 +27,8 @@ const router = createBrowserRouter([
         element: <Publish />
       },
       {
-        path: "messages",
-        element: <Messages />
+        path: "logs",
+        element: <Logs />
       },
       {
         path: "publish",

@@ -1,12 +1,12 @@
 import EnvVars from "../constants/EnvVars";
-import Category from "../types/Category";
+import Log from "../types/Log";
 
 
 const url = `${EnvVars.API_URL}:${EnvVars.API_PORT}/api`;
 
-export const getCategories = async (): Promise<Category[] | null> => {
+export const getLogs = async (): Promise<Log[] | null> => {
     try {
-        const response = await fetch(`${url}/categories`);
+        const response = await fetch(`${url}/logs`);
         if (!response.ok) {
             throw new Error(`Error while fetching Categories:\n
             Status code: ${response.status}
@@ -14,7 +14,7 @@ export const getCategories = async (): Promise<Category[] | null> => {
         }
 
         const data = await response.json();
-        return data.categories;
+        return data.logs;
     } catch (error) {
         console.error(error);
         return null;
