@@ -10,6 +10,10 @@ export function getRandomInt(): number {
   return Math.floor(Math.random() * 1_000_000_000_000);
 }
 
+export function getRandomBoolean(): boolean {
+  return Math.random() > .5 ? true : false;
+}
+
 /**
  * Wait for a certain number of milliseconds.
  */

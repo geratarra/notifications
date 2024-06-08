@@ -1,4 +1,4 @@
-import { ICategory } from "../models/Category";
+import { ICategory } from "../models/ICategory";
 import CategoryRepo from "../repos/CategoryRepo";
 
 
