@@ -3,11 +3,14 @@ import EnvVars from "../constants/EnvVars";
 import { getCategories } from "../services/CategoryService";
 import Category from "../types/Category";
 import StringUtils from "../utils/StringUtils";
+import axios from "axios";
 
 export default () => {
     const [message, setMessage] = useState<string>();
-    const [category, setCategory] = useState<string>("Sports");
+    const [category, setCategory] = useState<string>("Select category");
     const [categories, setCategories] = useState<Category[] | null>([]);
+    const [loadingPublishing, setLoadingPublishing] = useState<boolean>(false);
+    const [notificationResponse, setNotificationResponse] = useState<{success: boolean, message: string} | null>(null);
 
     const fetchCategories = async () => {
         setCategories(await getCategories());
@@ -17,14 +20,28 @@ export default () => {
         fetchCategories();
     }, []);
 
-    const handleSubmit = async (event: React.FormEvent) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            const url = `${EnvVars.API_URL}:${EnvVars.API_PORT}/api/users/all`;
-            const data = await fetch(url).then(res => res.json());;
-            console.log(data);
+            const form = event.currentTarget;
+            setLoadingPublishing(true);
+            const formData = new FormData(form);
+            const url = `${EnvVars.API_URL}:${EnvVars.API_PORT}/api/publish`;
+            const data = await axios({
+                method: "post",
+                url: url,
+                data: { message: Object.fromEntries(formData) }
+            })
+                .then(res => setNotificationResponse(res.data))
+                .catch(error => {
+                    setNotificationResponse({ success: false, message: error })
+                })
+                .finally(() => { setLoadingPublishing(false) });
+
         } catch (error) {
             console.error(error);
+            setLoadingPublishing(false);
+            setNotificationResponse({ success: false, message: error as string });
         }
     };
 
@@ -41,13 +58,13 @@ export default () => {
     return (
         <section className="py-5">
             <div className="container">
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} method="post" className="block">
                     <div className="field">
-                        <label className="label">Category</label>
+                        <label className="label" htmlFor="select-category">Category</label>
                         <div className="control">
                             <div className="select">
-                                <select onChange={handleSelectChange}>
-                                    {categories?.map(category => <option key={category.id} value={category.id}>{StringUtils.capitalizeFirstLetter(category.name)}</option>)}
+                                <select required onChange={handleSelectChange} name="category" id="select-category" value={category}>
+                                    {categories?.map(category => <option key={category.id} value={category.name}>{StringUtils.capitalizeFirstLetter(category.name)}</option>)}
                                 </select>
                             </div>
                         </div>
@@ -55,7 +72,7 @@ export default () => {
                     <div className="field">
                         <label className="label">Message</label>
                         <div className="control">
-                            <textarea onChange={handleMessageChange} value={message} className="textarea" placeholder="Publish message..."></textarea>
+                            <textarea name="message" required onChange={handleMessageChange} value={message} className="textarea" placeholder="Publish message..."></textarea>
                         </div>
                     </div>
 
@@ -65,7 +82,12 @@ export default () => {
                         </div>
                     </div>
                 </form>
-            </div >
-        </section >
+                {loadingPublishing && <progress className="block progress is-small is-primary" max="100"></progress>}
+                {notificationResponse && <div className={`notification ${notificationResponse.success ? "is-link" : "is-danger"}`}>
+                    <button className="delete" onClick={() => setNotificationResponse(null)}></button>
+                    {notificationResponse.message}
+                </div>}
+            </div>
+        </section>
     );
 }
