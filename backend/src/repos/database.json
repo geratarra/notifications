@@ -1,36 +1,56 @@
 {
-  "users": [
-    {
-      "id": 366115170645,
-      "name": "Sean Maxwell",
-      "email": "smaxwell@example.com",
-      "created": "2024-03-22T05:14:36.252Z"
-    },
-    {
-      "id": 310946254456,
-      "name": "John Smith",
-      "email": "john.smith@example.com",
-      "created": "2024-03-22T05:20:55.079Z"
-    },
-    {
-      "id": 143027113460,
-      "name": "Gordan Freeman",
-      "email": "nova@prospect.com",
-      "created": "2024-03-22T05:42:18.895Z"
-    }
-  ],
-  "categories": [
-    {
-      "id": 1,
-      "name": "sports"
-    },
-    {
-      "id": 2,
-      "name": "finance"
-    },
-    {
-      "id": 3,
-      "name": "movies"
-    }
-  ]
+    "users": [
+        {
+            "id": 366115170645,
+            "name": "Sean Maxwell",
+            "email": "smaxwell@example.com",
+            "created": "2024-03-22T05:14:36.252Z",
+            "subscribed": {
+                "sports": true,
+                "finance": true,
+                "movies": true
+            },
+            "channels": [
+                "email",
+                "sms",
+                "push"
+            ]
+        },
+        {
+            "id": 310946254456,
+            "name": "John Smith",
+            "email": "john.smith@example.com",
+            "created": "2024-03-22T05:20:55.079Z",
+            "subscribed": {
+                "sports": true
+            },
+            "channels": [
+                "email",
+                "sms"
+            ]
+        },
+        {
+            "id": 143027113460,
+            "name": "Gordan Freeman",
+            "email": "nova@prospect.com",
+            "created": "2024-03-22T05:42:18.895Z",
+            "subscribed": {},
+            "channels": []
+        }
+    ],
+    "categories": [
+        {
+            "id": 1,
+            "name": "sports"
+        },
+        {
+            "id": 2,
+            "name": "finance"
+        },
+        {
+            "id": 3,
+            "name": "movies"
+        }
+    ],
+    "logs": []
 }
