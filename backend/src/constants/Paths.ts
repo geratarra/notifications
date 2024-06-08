@@ -14,6 +14,14 @@ export default {
   },
   Categories: {
     Base: "/categories",
-    Get: "/all"
+    Get: "/"
+  },
+  Publish: {
+    Base: "/publish",
+    Post: "/"
+  },
+  Logs: {
+    Base: "/logs",
+    Get: "/"
   }
 } as const;
