@@ -14,6 +14,8 @@ export interface IUser {
   name: string;
   email: string;
   created: Date;
+  subscribed: { [key: string]: string };
+  channels: string[];
 }
 
 
@@ -27,12 +29,16 @@ function new_(
   email?: string,
   created?: Date,
   id?: number, // id last cause usually set by db
+  subscribed?: { [key: string]: string },
+  channels?: string[]
 ): IUser {
   return {
     id: (id ?? -1),
     name: (name ?? ''),
     email: (email ?? ''),
     created: (created ? new Date(created) : new Date()),
+    subscribed: (subscribed ?? {}),
+    channels: (channels ?? [])
   };
 }
 
