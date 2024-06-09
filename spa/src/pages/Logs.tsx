@@ -3,7 +3,7 @@ import { getLogs } from "../services/LogsService";
 import Log from "../types/Log";
 import StringUtils from "../utils/StringUtils";
 
-export default () => {
+const Logs = () => {
     const [logs, setLogs] = useState<Log[] | null>([]);
     const [loadingLogs, setLoadingLogs] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
@@ -11,7 +11,6 @@ export default () => {
     const fetchLogs = async () => {
         setLoadingLogs(true);
         try {
-            const logsResponse = await getLogs();
             setLogs(await getLogs());
             setError(false);
         } catch (error) {
@@ -29,7 +28,7 @@ export default () => {
 
     return (
         <section className="py-5">
-            <div className="container">
+            <div className="container is-fluid">
                 {error && <div className="notification is-danger">
                     Error while fetching logs. Please try again.
                 </div>}
@@ -63,4 +62,6 @@ export default () => {
             </div>
         </section>
     );
-}
+};
+
+export default Logs;

@@ -3,7 +3,10 @@ services:
     build: ./spa
     container_name: frontend-spa
     ports:
-      - "3002:3000"
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost
+      - REACT_APP_API_PORT=8080
     # ToDo: upgrade docker compose so that we can use the watch feature
     # develop: 
     #   watch:
@@ -17,16 +20,16 @@ services:
     build: ./backend
     container_name: backend-service
     ports:
-      - "8081:8080"
-    depends_on:
-      - db
+      - "8080:8080"
+    # depends_on:
+    #   - db
 
-  db:
-    image: mongo:latest
-    container_name: db-service
-    environment:
-      MONGO_USER: user
-      MONGO_PASSWORD: password
-      MONGO_DB: mydatabase
-    ports:
-      - "5433:5432"
+  # db:
+  #   image: mongo:latest
+  #   container_name: db-service
+  #   environment:
+  #     MONGO_USER: user
+  #     MONGO_PASSWORD: password
+  #     MONGO_DB: mydatabase
+  #   ports:
+  #     - "5433:5432"

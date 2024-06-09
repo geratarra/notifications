@@ -5,12 +5,13 @@ import Category from "../types/Category";
 import StringUtils from "../utils/StringUtils";
 import axios from "axios";
 
-export default () => {
+
+const Publish = () => {
     const [message, setMessage] = useState<string>();
     const [category, setCategory] = useState<string>("Select category");
     const [categories, setCategories] = useState<Category[] | null>([]);
     const [loadingPublishing, setLoadingPublishing] = useState<boolean>(false);
-    const [notificationResponse, setNotificationResponse] = useState<{success: boolean, message: string} | null>(null);
+    const [notificationResponse, setNotificationResponse] = useState<{ success: boolean, message: string } | null>(null);
 
     const fetchCategories = async () => {
         setCategories(await getCategories());
@@ -27,7 +28,7 @@ export default () => {
             setLoadingPublishing(true);
             const formData = new FormData(form);
             const url = `${EnvVars.API_URL}:${EnvVars.API_PORT}/api/publish`;
-            const data = await axios({
+            await axios({
                 method: "post",
                 url: url,
                 data: { message: Object.fromEntries(formData) }
@@ -57,7 +58,7 @@ export default () => {
 
     return (
         <section className="py-5">
-            <div className="container">
+            <div className="container is-fluid">
                 <form onSubmit={handleSubmit} method="post" className="block">
                     <div className="field">
                         <label className="label" htmlFor="select-category">Category</label>
@@ -90,4 +91,5 @@ export default () => {
             </div>
         </section>
     );
-}
+};
+export default Publish;

@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default () => {
+const Navbar = () => {
     const [burgerOpen, setBurgerOpen] = useState(false);
 
     const handleMenuClik = (event: React.MouseEvent<HTMLAnchorElement>) => {
         event.preventDefault();
         setBurgerOpen(!burgerOpen);
     }
-    
+
     return (
         <nav className="navbar" role="navigation" aria-label="main navigation">
             <div className="navbar-brand">
@@ -37,4 +37,6 @@ export default () => {
             </div>
         </nav>
     );
-}
+};
+
+export default Navbar;

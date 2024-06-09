@@ -2,6 +2,7 @@ FROM node:20-alpine
 
 RUN apk update
 RUN apk upgrade
+RUN apk add curl
 
 RUN mkdir /spa
 
