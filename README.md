@@ -105,7 +105,7 @@ The Logs page is a simple view where you can see a list of notifications sent th
 <!-- CONTACT -->
 ## Contact
 
-Gerardo  - geratarra@gmail.com
+[Get to know me](https://geratarra.github.io/)
 
 Project Link: [https://github.com/geratarra/notifications](https://github.com/geratarra/notifications)
 
