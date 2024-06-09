@@ -59,6 +59,7 @@ const Publish = () => {
     return (
         <section className="py-5">
             <div className="container is-fluid">
+                <h4 className="title is-4">Publish a new message</h4>
                 <form onSubmit={handleSubmit} method="post" className="block">
                     <div className="field">
                         <label className="label" htmlFor="select-category">Category</label>
