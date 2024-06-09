@@ -22,38 +22,6 @@ export interface IUser {
 // **** Functions **** //
 
 /**
- * Create new User.
- */
-function new_(
-  name?: string,
-  email?: string,
-  created?: Date,
-  id?: number, // id last cause usually set by db
-  subscribed?: { [key: string]: string },
-  channels?: string[]
-): IUser {
-  return {
-    id: (id ?? -1),
-    name: (name ?? ''),
-    email: (email ?? ''),
-    created: (created ? new Date(created) : new Date()),
-    subscribed: (subscribed ?? {}),
-    channels: (channels ?? [])
-  };
-}
-
-/**
- * Get user instance from object.
- */
-function from(param: object): IUser {
-  if (!isUser(param)) {
-    throw new Error(INVALID_CONSTRUCTOR_PARAM);
-  }
-  const p = param as IUser;
-  return new_(p.name, p.email, p.created, p.id);
-}
-
-/**
  * See if the param meets criteria to be a user.
  */
 function isUser(arg: unknown): boolean {
@@ -71,7 +39,5 @@ function isUser(arg: unknown): boolean {
 // **** Export default **** //
 
 export default {
-  new: new_,
-  from,
-  isUser,
+  isUser
 } as const;
