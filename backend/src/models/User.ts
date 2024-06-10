@@ -3,7 +3,7 @@ import moment from 'moment';
 
 // **** Variables **** //
 
-const INVALID_CONSTRUCTOR_PARAM = 'nameOrObj arg must a string or an object ' + 
+const INVALID_CONSTRUCTOR_PARAM = 'nameOrObj arg must a string or an object ' +
   'with the appropriate user keys.';
 
 
@@ -14,7 +14,7 @@ export interface IUser {
   name: string;
   email: string;
   created: Date;
-  subscribed: { [key: string]: string };
+  subscribed: { [key: string]: boolean };
   channels: string[];
 }
 
@@ -28,16 +28,38 @@ function isUser(arg: unknown): boolean {
   return (
     !!arg &&
     typeof arg === 'object' &&
-    'id' in arg && typeof arg.id === 'number' && 
-    'email' in arg && typeof arg.email === 'string' && 
+    'id' in arg && typeof arg.id === 'number' &&
+    'email' in arg && typeof arg.email === 'string' &&
     'name' in arg && typeof arg.name === 'string' &&
     'created' in arg && moment(arg.created as string | Date).isValid()
   );
+}
+
+/**
+ * Create new User.
+ */
+function new_(
+  name?: string,
+  email?: string,
+  created?: Date,
+  id?: number, // id last cause usually set by db
+  subscribed?: { [key: string]: boolean },
+  channels?: string[]
+): IUser {
+  return {
+    id: (id ?? -1),
+    name: (name ?? ''),
+    email: (email ?? ''),
+    created: (created ? new Date(created) : new Date()),
+    subscribed: (subscribed ?? {}),
+    channels: (channels ?? [])
+  };
 }
 
 
 // **** Export default **** //
 
 export default {
-  isUser
+  isUser,
+  new: new_
 } as const;

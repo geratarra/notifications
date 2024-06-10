@@ -10,7 +10,7 @@ async function publishMessage(req: IReq<{ message: IMessage }>, res: IRes) {
     return res.status(HttpStatusCodes.OK).json({
         success: publishedMessage,
         message: publishedMessage ? "The message was published successfully" : "The message couldn't be published " +
-            " in at least one channel. Please check the logs."
+            "in at least one channel. Please check the logs."
     });
 }
 
