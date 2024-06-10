@@ -97,10 +97,11 @@ The Logs page is a simple view where you can see a list of notifications sent th
 
 <!-- ROADMAP -->
 ## Roadmap
-- [ ] Add tests, either unit, integration, etc.
+- [ ] Add more test coverage, either unit, integration, etc.
 - [ ] Set up Docker watch to automatically update and preview the running Compose services as the code is edited and saved.
 - [ ] Add a new service for allocating the database.
 - [ ] It would be probably a good idea to introduce Worker Threads to "divide and conquer" the task of sending a notification through multiple channels.
+- [ ] Currently, if there are no users to send a message or if there are users but none of them has any channel where to receive a notification, the API response will resolve successfully. This is probably ok but it would be good to at least respond with a more detailed message. Another alternative would be to respond not with a 200 HTTP status code.
 
 <!-- CONTACT -->
 ## Contact
